@@ -1,9 +1,7 @@
-// src/components/MovieDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import play from '../assets/Play.svg'
-
+import play from '../assets/Play.svg';
 
 function MovieDetails() {
   const { id } = useParams();
@@ -35,39 +33,39 @@ function MovieDetails() {
     return <p>Movie not found.</p>;
   }
 
+  // Convert release date to UTC format
+  const releaseDateUTC = new Date(movie.release_date).toUTCString();
+
   return (
-    <div className="container-fluid movie-details-container " >
-    
+    <div className="container-fluid movie-details-container">
       <div className="row">
         <div className="col-md-12">
-        <div
-  className="movie-image-container details"
-  style={{
-    backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})`, // Use 'original' size
-    backgroundSize: 'cover', // Adjust as needed
-    backgroundPosition: 'center center',
-    backgroundRepeat: 'no-repeat',
-    minHeight: '50vh',
-    backgroundColor: 'rgb(0, 0, 0)',
-    display: 'flex', // Enable flexbox
-    justifyContent: 'center', // Center horizontally
-    alignItems: 'center', // Center vertically
-  }}
->
-  
-  <div className="watch-trailer btn btn-danger">
-    <img src={play} alt="Play Icon" /> {/* Add your icon here */}
-    <span className="watch-trailer-text">Watch Trailer</span>
-  </div>
-</div>
-
+          <div
+            className="movie-image-container details"
+            style={{
+              backgroundImage: `url(https://image.tmdb.org/t/p/original/${movie.poster_path})`, // Use 'original' size
+              backgroundSize: 'cover', // Adjust as needed
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'no-repeat',
+              minHeight: '50vh',
+              backgroundColor: 'rgb(0, 0, 0)',
+              display: 'flex', // Enable flexbox
+              justifyContent: 'center', // Center horizontally
+              alignItems: 'center', // Center vertically
+            }}
+          >
+            <div className="watch-trailer btn btn-danger">
+              <img src={play} alt="Play Icon" /> {/* Add your icon here */}
+              <span className="watch-trailer-text">Watch Trailer</span>
+            </div>
+          </div>
         </div>
         <div className="col-md-12">
-        <h2 className="movie-title" data-testid="movie-title">
+          <h2 className="movie-title" data-testid="movie-title">
             {movie.title}
           </h2>
           <p className="movie-release-date" data-testid="movie-release-date">
-            Release Date: {movie.release_date}
+            Release Date (UTC): {releaseDateUTC}
           </p>
           <p className="movie-runtime" data-testid="movie-runtime">
             Runtime: {movie.runtime} minutes
