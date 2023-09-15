@@ -1,7 +1,7 @@
 // NowPlaying.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Search from './Search';
+
 import play from '../assets/Play.svg'
 import imdb from '../assets/imdb.svg'
 import tomato from '../assets/tomato.svg'

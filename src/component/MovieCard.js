@@ -34,10 +34,10 @@ function MovieCard({ movie }) {
           <strong>{movie.title}</strong>
         </p>
         <div className='d-flex justify-content-between '>
-          <p className="card-text " data-testid="movie-rating">
+          <p className="card-text ">
             <img src={imdb} alt="IMDb Logo" /> {movie.rating}
           </p>
-          <p className="card-text ya " data-testid="movie-percentage">
+          <p className="card-text ya " >
             <img src={tomato} alt="Tomato Logo" /> {movie.percentage}%
           </p>
         </div>
