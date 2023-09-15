@@ -137,7 +137,7 @@ a {
 a {
   text-decoration: none !important; /* Remove underline on hover */
 }
-@media (max-width: 768px) {
+@media (max-width: 375x) {
   .navbar-nav {
     flex-direction: column;
     align-items: center;
@@ -157,3 +157,38 @@ a {
 .movie-con{
   margin-top: 13%;
 }
+
+/* Default styles for the navbar */
+.navbar {
+  padding: 10px 0;
+}
+
+/* Styles for the logo */
+.navbar-brand img {
+  max-width: 100%; /* Ensure the logo scales with the screen size */
+}
+
+/* Styles for the search input */
+.search-input {
+  width: 50%; /* Default width for the input */
+}
+
+/* Styles for the "Signup" link */
+.nav-link {
+  margin-left: 30px; /* Default margin for the link */
+}
+
+/* Media query for screens smaller than 768px (adjust as needed) */
+@media (max-width: 768px) {
+  /* Reduce the width of the search input and adjust margins */
+  .search-input {
+    width: 60%; /* Adjust the width to your preference */
+    margin-right: 0;
+  }
+
+  /* Center-align the "Signup" link and menu icon */
+  .nav-link, .navbar-nav .nav-item:nth-child(2) {
+    
+  }
+}
+

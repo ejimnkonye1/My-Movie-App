@@ -66,7 +66,7 @@ function Header() {
     minHeight: '100vh',
     backgroundColor: 'rgb(0, 0, 0)',
   }}>
-    <nav className="navbar navbar-expand-lg navbar-light "  >
+    <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
         <div className="navbar-brand">
           <img src={logo} alt="Logo" />
@@ -78,7 +78,6 @@ function Header() {
             placeholder="What do you want to watch..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-           
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 handleSearch();
@@ -87,25 +86,24 @@ function Header() {
             style={{
               fontSize: '',
               padding: '10px 15px',
-              width: '50%', // Use 100% width to fill the available space
+              width: '50%',
               marginRight: '30px',
               borderRight: 'none',
               borderLeft: 'none',
-              borderTop : 'none',
-              borderBottom : 'none',
-              outline : 'none',
+              borderTop: 'none',
+              borderBottom: 'none',
+              outline: 'none',
               textDecoration: 'none',
               background: 'transparent',
               border: 'none',
               boxShadow: 'none',
             }}
-            disabled={loading}
           />
         </div>
-        <ul className="navbar-nav ">
-          <li className="nav-item p-2 ">
-            <a className="nav-link " href="#" style={{marginLeft:'30px'}} >
-               Signup
+        <ul className="navbar-nav">
+          <li className="nav-item p-2">
+            <a className="nav-link" href="#" style={{ marginLeft: '30px' }}>
+              Signup
             </a>
           </li>
           <li className="nav-item p-2">
@@ -113,7 +111,6 @@ function Header() {
           </li>
         </ul>
       </div>
-      
     </nav>
 
    <>
@@ -284,10 +281,10 @@ function Header() {
               <strong>{movie.title}</strong>
             </p>
             <div className='d-flex justify-content-between align-items-center'>
-              <p className="card-text p-2" data-testid="movie-rating">
+              <p className="card-text p-2" >
                 <img src={imdb} alt="IMDb Logo" /> {movie.rating}
               </p>
-              <p className="card-text ya p-2" data-testid="movie-percentage">
+              <p className="card-text ya p-2" >
                 <img src={tomato} alt="Tomato Logo" /> {movie.percentage}%
               </p>
             </div>
