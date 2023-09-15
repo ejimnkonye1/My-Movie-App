@@ -7,15 +7,17 @@ function HomePage() {
   const [topMovies, setTopMovies] = useState([]);
   const [genres, setGenres] = useState({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // New state for error handling
 
   useEffect(() => {
     const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
     const apiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
     const genresApiUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
 
-    // Fetch genres first
-    axios.get(genresApiUrl)
-      .then((genresResponse) => {
+    const fetchData = async () => {
+      try {
+        // Fetch genres first
+        const genresResponse = await axios.get(genresApiUrl);
         const genresData = genresResponse.data.genres;
         const genreMap = {};
         genresData.forEach((genre) => {
@@ -24,41 +26,37 @@ function HomePage() {
         setGenres(genreMap);
 
         // Fetch top movies with genres
-        axios.get(apiUrl)
-          .then(async (response) => {
-            const topMoviesData = response.data.results.slice(0, 10);
+        const response = await axios.get(apiUrl);
+        const topMoviesData = response.data.results.slice(0, 10);
 
-            // Fetch additional movie details for each movie
-            const moviesWithDetails = await Promise.all(
-              topMoviesData.map(async (movie) => {
-                const movieApiUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=en-US`;
-                const movieResponse = await axios.get(movieApiUrl);
-                const { vote_average, vote_count, genres } = movieResponse.data;
-                const rating = vote_average;
-                const percentage = (vote_count / 10) * 100; // Adjust as needed
-                const genreNames = genres.map((genre) => genre.name).join(', ');
+        // Fetch additional movie details for each movie
+        const moviesWithDetails = await Promise.all(
+          topMoviesData.map(async (movie) => {
+            const movieApiUrl = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&language=en-US`;
+            const movieResponse = await axios.get(movieApiUrl);
+            const { vote_average, vote_count, genres } = movieResponse.data;
+            const rating = vote_average;
+            const percentage = (vote_count / 10) * 100; // Adjust as needed
+            const genreNames = genres.map((genre) => genre.name).join(', ');
 
-                return { ...movie, rating, percentage, genreNames };
-              })
-            );
-
-            setTopMovies(moviesWithDetails);
-            setLoading(false);
+            return { ...movie, rating, percentage, genreNames };
           })
-          .catch((error) => {
-            console.error('Error fetching top movies:', error);
-            setLoading(false);
-          });
-      })
-      .catch((error) => {
-        console.error('Error fetching genres:', error);
+        );
+
+        setTopMovies(moviesWithDetails);
         setLoading(false);
-      });
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('An error occurred while fetching data. Please try again later.');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <div className="container mt-5">
-      
       <div className="row">
         <div className="col d-flex justify-content-between align-items-center">
           <h5 className="">Featured movies</h5>
@@ -70,6 +68,8 @@ function HomePage() {
         <div className="col">
           {loading ? (
             <p>Loading...</p>
+          ) : error ? (
+            <p>{error}</p>
           ) : (
             <div className="row">
               {topMovies.map((movie) => (
