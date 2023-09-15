@@ -10,7 +10,7 @@ function HomePage() {
 
   useEffect(() => {
     const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
-    const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+    const apiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
     const genresApiUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
 
     // Fetch genres first
