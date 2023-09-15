@@ -20,7 +20,7 @@ function Header() {
   const getRandomBackground = async () => {
     try {
       const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
-      const nowPlayingUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`;
+      const nowPlayingUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
       const response = await axios.get(nowPlayingUrl);
       const movies = response.data.results;
       const randomIndex = Math.floor(Math.random() * movies.length);
