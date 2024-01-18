@@ -11,7 +11,7 @@ function HomePage() {
 
   useEffect(() => {
     const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
-    const apiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
+    const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
     const genresApiUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`;
 
     const fetchData = async () => {
@@ -60,7 +60,11 @@ function HomePage() {
       <div className="row">
         <div className="col d-flex justify-content-between align-items-center">
           <h5 className="">Featured movies</h5>
-          <a className='by' href='#'>See more</a>
+          <a className='by text-danger' href='#'>  See more
+  <i className='fa-solid fa-chevron-right' style={{ marginLeft: '5px' }}></i>
+
+
+</a>
         </div>
       </div>
 
@@ -73,7 +77,7 @@ function HomePage() {
           ) : (
             <div className="row">
               {topMovies.map((movie) => (
-                <div key={movie.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mt-3 mr-4">
+                <div key={movie.id} className="col-6 col-sm-6 col-md-4 col-lg-3 mt-3 mr-4">
                   <Link to={`/movies/${movie.id}`}>
                     <MovieCard movie={movie} />
                   </Link>

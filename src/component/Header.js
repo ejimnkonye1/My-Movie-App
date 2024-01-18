@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import axios from 'axios';
 import logo from '../assets/Logo.svg';
 import menu from '../assets/Menu.svg';
@@ -8,7 +10,8 @@ import imdb from '../assets/imdb.svg';
 import tomato from '../assets/tomato.svg';
 import backgroundImg from '../assets/Poster.png'
 import HomePage from './HomePage';
-
+import SearchResults from './searchresult';
+import Layout from './layout';
 function Header() {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -20,7 +23,7 @@ function Header() {
   const getRandomBackground = async () => {
     try {
       const apiKey = '1a4ccc89abfa206e97d2fc3f73b1e3e2';
-      const nowPlayingUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
+      const nowPlayingUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
       const response = await axios.get(nowPlayingUrl);
       const movies = response.data.results;
       const randomIndex = Math.floor(Math.random() * movies.length);
@@ -55,9 +58,14 @@ function Header() {
         setLoading(false);
       });
   };
+
   return (
     <div>
+      
+
+      
     {showBackgroundImage ? (
+      <div className=''>
   <div className="header" style={{ 
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'cover',
@@ -68,8 +76,10 @@ function Header() {
   }}>
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container">
-        <div className="navbar-brand">
-          <img src={logo} alt="Logo" />
+        <div className="navbar-brad">
+        <a href="/">
+          <img src={logo} alt="Logo" className='logos' />
+          </a>
         </div>
         <div className="d-flex justify-content-center align-items-center flex-grow-1">
           <input
@@ -102,12 +112,12 @@ function Header() {
         </div>
         <ul className="navbar-nav">
           <li className="nav-item p-2">
-            <a className="nav-link" href="#" style={{ marginLeft: '30px' }}>
+            <a className="nav-link sign" href="#" style={{ marginLeft: '30px' }}>
               Signup
             </a>
           </li>
           <li className="nav-item p-2">
-            <img src={menu} alt="Menu" />
+            <img src={menu} alt="Menu" className='menus' />
           </li>
         </ul>
       </div>
@@ -124,83 +134,42 @@ function Header() {
                 <p>
                   <img src={imdb} alt="IMDb Logo" /> {selectedMovie.vote_average}
                 </p>
-                <p>
-                  <img src={tomato} alt="Tomato Logo" />  %
-                </p>
+                {/* <p className='d-flex'  style={{ marginLeft: '10px' }}>
+                  <img src={tomato} alt="Tomato Logo" />  
+                </p> */}
               </div>
               <p>{selectedMovie.overview}</p>
-              <a className="btn btn-danger mt-5">Watch trailer</a>
+            
+              <Link to={`/movies/${selectedMovie.id}`}>
+          <a className="btn btn-danger mt-5 mb-4">Watch trailer</a>
+        </Link>
             </div>
           </div>
         </div>
       )}
-    
+      
   
             </>
+           
+ </div>
+ <Layout />
+ </div>
 
-
-
-          {loading && <p>Loading...</p>}
-          {!loading && searchResults.length === 0  }
-          {!loading && searchResults.length > 0 && (
-            <div className="container mt-5">
-              <div className="row">
-                {searchResults.map((movie) => (
-                  <div key={movie.id} className="col-12 col-sm-6 col-md-4 col-lg-4 mt-3">
-                    <div className="card h-100">
-                      <div style={{ position: 'relative' }}>
-                        {/* Love icon */}
-                        <img
-                          src={loveIcon}
-                          alt="Love Icon"
-                          style={{
-                            position: 'absolute',
-                            top: '10px',
-                            right: '10px',
-                            width: '24px', // Adjust the size as needed
-                          }}
-                        />
-                        <img
-                          src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                          alt={movie.title}
-                          className='card-img-top'
-                          
-                        />
-                      </div>
-                      <div className="card-body">
-            <p className="card-title" >
-              <strong>{movie.title}</strong>
-            </p>
-            <div className='d-flex justify-content-between align-items-center'>
-              <p className="card-text p-2">
-                <img src={imdb} alt="IMDb Logo" /> {movie.rating}
-              </p>
-              <p className="card-text ya p-2" >
-                <img src={tomato} alt="Tomato Logo" /> {movie.percentage}%
-              </p>
-            </div>
-            <p className="card-text ya" >
-              Release Date (UTC): {movie.release_date}
-            </p>
-          </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
+        
          ) : (
           <div className="header">
-            {/* Your content without the background image */}
-            {/* Add your non-background content here */}
+  
             
     <div className='header'>
     <nav className="navbar navbar-expand-lg navbar-light bg-dark "  >
       <div className="container">
-        <div className="navbar-brand">
-          <img src={logo} alt="Logo" />
+     
+        <div className="navbar-brad">
+        <a href="/">
+          <img src={logo} alt="Logo" className='logos' />
+         </a>
         </div>
+        
         <div className="d-flex justify-content-center align-items-center  flex-grow-1">
           <input
             type="text"
@@ -230,7 +199,7 @@ function Header() {
               boxShadow: 'none',
               
               '::placeholder': {
-                color: 'white', // Set the placeholder text color to white
+                color: 'white' , // Set the placeholder text color to white
               },
             }}
             disabled={loading}
@@ -238,72 +207,26 @@ function Header() {
         </div>
         <ul className="navbar-nav ">
           <li className="nav-item p-2 ">
-            <a className="nav-link text-white" href="#" style={{marginLeft:'30px'}} >
+            <a className="nav-link text-white sign" href="#" style={{marginLeft:'30px'}} >
                Signup
             </a>
           </li>
           <li className="nav-item p-2">
-            <img src={menu} alt="Menu" />
+            <img src={menu} alt="Menu" className='menus' />
           </li>
         </ul>
       </div>
       
     </nav>
           {loading && <p>Loading...</p>}
-          {!loading && searchResults.length === 0  }
-          {!loading && searchResults.length > 0 && (
-            <div className="container mt-5">
-              <div className="row">
-                {searchResults.map((movie) => (
-                  <div key={movie.id} className="col-12 col-sm-6 col-md-4 col-lg-4 mt-3">
-                    <div className="card h-100">
-                      <div style={{ position: 'relative' }}>
-                        {/* Love icon */}
-                        <img
-                          src={loveIcon}
-                          alt="Love Icon"
-                          style={{
-                            position: 'absolute',
-                            top: '10px',
-                            right: '10px',
-                            width: '24px', // Adjust the size as needed
-                          }}
-                        />
-                        <img
-                          src={`https://image.tmdb.org/t/p/w300/${movie.poster_path}`}
-                          alt={movie.title}
-                          className='card-img-top'
-                          data-testid='movie-poster'
-                        />
-                      </div>
-                      <div className="card-body">
-            <p className="card-title" data-testid="movie-title">
-              <strong>{movie.title}</strong>
-            </p>
-            <div className='d-flex justify-content-between align-items-center'>
-              <p className="card-text p-2" >
-                <img src={imdb} alt="IMDb Logo" /> {movie.rating}
-              </p>
-              <p className="card-text ya p-2" >
-                <img src={tomato} alt="Tomato Logo" /> {movie.percentage}%
-              </p>
-            </div>
-            <p className="card-text ya" data-testid="movie-release-date">
-              Release Date (UTC): {movie.release_date}
-            </p>
-          </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <SearchResults searchResults={searchResults} />
         </div>
          
     
           </div>
           
             )}
+          
         </div>
         
   );

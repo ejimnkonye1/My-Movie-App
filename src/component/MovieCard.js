@@ -4,8 +4,9 @@ import tomato from '../assets/tomato.svg';
 import loveIcon from '../assets/Favorite.svg';
 
 function MovieCard({ movie }) {
+  const percentage = movie.vote_average * 10;
   return (
-    <div className="card h-100" data-testid="movie-card ">
+    <div className="card h-100" data-testid="movie-card">
       <div className='bg-success' style={{ position: 'relative' }}>
         {/* Love icon */}
         <img
@@ -35,10 +36,10 @@ function MovieCard({ movie }) {
         </p>
         <div className='d-flex justify-content-between '>
           <p className="card-text ">
-            <img src={imdb} alt="IMDb Logo" /> {movie.rating}
+            <img src={imdb} alt="IMDb Logo" /> {movie.rating.toFixed(1)}
           </p>
           <p className="card-text ya " >
-            <img src={tomato} alt="Tomato Logo" /> {movie.percentage}%
+            <img src={tomato} alt="Tomato Logo" /> {percentage}%
           </p>
         </div>
         <p className="card-text ya" data-testid="movie-release-date">

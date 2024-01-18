@@ -1,60 +1,5 @@
 
 
-/* src/components/HomePage.css */
-/* .movie-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.movie-card {
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.movie-card img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-} */
-
-/* Add more styles as needed */
-/* src/components/Search.css */
-/* .search-container {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.search-container input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.search-container button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.search-results {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-} */
-
-/* Add more styles as needed */
-/* NowPlaying.css */
-
-
 
 .background-movie {
   /* width: 100%;
@@ -120,7 +65,7 @@
 }
 
 
-/* Inside your CSS file or component */
+
 
 .card a{
   text-decoration: none;
@@ -128,7 +73,7 @@
 a{
   text-decoration: none;
 }
-/* In your global CSS or rebot.scss */
+
 a {
   text-decoration: none !important; /* Use !important to override global styles */
   color: inherit; /* To inherit the link color from the parent element */
@@ -165,7 +110,7 @@ a {
 
 /* Styles for the logo */
 .navbar-brand img {
-  max-width: 100%; /* Ensure the logo scales with the screen size */
+   /* Ensure the logo scales with the screen size */
 }
 
 /* Styles for the search input */
@@ -188,7 +133,29 @@ a {
 
   /* Center-align the "Signup" link and menu icon */
   .nav-link, .navbar-nav .nav-item:nth-child(2) {
-    
+    text-align: center;
   }
 }
 
+/* came back to fix some stuffs*/
+.form-control::placeholder{
+  color: white !important;
+  z-index: 2;
+}
+.form-control{
+  color:  white !important;
+}
+@media screen and (max-width:768px){
+  .form-control{
+    display: none !important;
+  }
+  .sign{
+    display: none !important;
+  }
+  .logos{
+    width: 90% !important;
+  }
+  .menus{
+    margin-bottom: 10px;
+  }
+}
